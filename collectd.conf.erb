@@ -1,0 +1,133 @@
+# Config file for wallarm-collectd.
+#
+# Please, read next docs before change this file:
+#
+# 1. Wallarm Node monitoring guide.
+#
+# 2. Original collectd documentation
+#   * collectd(1)
+#   * /usr/share/doc/wallarm-collectd-core/README.Debian.plugins
+#   * http://collectd.org
+#
+
+FQDNLookup true
+
+Interval 10
+MaxReadInterval 600
+#Timeout 2
+#ReadThreads 5
+#WriteThreads 5
+
+BaseDir "<%= ENV['WALLARM_DIR'] %>"
+PluginDir "<%= ENV['COLLECTD_LIBDIR'] %>"
+TypesDB "<%= ENV['COLLECTD_TYPESDB'] %>"
+PIDFile "/tmp/collectd.pid"
+
+AutoLoadPlugin true
+
+<LoadPlugin python>
+  Globals true
+</LoadPlugin>
+
+<Plugin python>
+  ModulePath "<%= ENV['COLLECTD_PYTHONDIR'] %>"
+
+  Import WallarmTarantool
+
+  <Module WallarmTarantool>
+    Host "<%= ENV['TARANTOOL_HOST'] %>"
+    Port <%= ENV['TARANTOOL_PORT'] %>
+  </Module>
+</Plugin>
+
+<Plugin python>
+  ModulePath "<%= ENV['COLLECTD_PYTHONDIR'] %>"
+
+  Import WallarmAPIWriter
+
+  <Module WallarmAPIWriter>
+    NodeYamlFile "<%= ENV['WALLARM_NODECONFIG'] %>"
+    TypesDB "<%= ENV['COLLECTD_TYPESDB'] %>"
+  </Module>
+</Plugin>
+
+<Plugin curl_json>
+  <URL "http://127.0.0.8:<%= ENV['PORT'] %>/wallarm-status?id=1">
+    Instance "wallarm_nginx"
+    <Key "requests">
+      Type gauge
+    </Key>
+    <Key "attacks">
+      Type gauge
+    </Key>
+    <Key "blocked">
+      Type gauge
+    </Key>
+    <Key "abnormal">
+      Type gauge
+    </Key>
+    <Key "tnt_errors">
+      Type gauge
+    </Key>
+    <Key "api_errors">
+      Type gauge
+    </Key>
+    <Key "requests_lost">
+      Type gauge
+    </Key>
+    <Key "time_detect">
+      Type gauge
+    </Key>
+    <Key "time_tnt">
+      Type gauge
+    </Key>
+    <Key "db_id">
+      Type gauge
+    </Key>
+    <Key "lom_id">
+      Type gauge
+    </Key>
+    <Key "proton_instances/total">
+      Type gauge
+    </Key>
+    <Key "proton_instances/success">
+      Type gauge
+    </Key>
+    <Key "proton_instances/fallback">
+      Type gauge
+    </Key>
+    <Key "proton_instances/failed">
+      Type gauge
+    </Key>
+  </URL>
+  <URL "http://127.0.0.8:<%= ENV['PORT'] %>/wallarm-status?id=2">
+    Instance "wallarm_nginx"
+    <Key "requests">
+      Type derive
+    </Key>
+    <Key "attacks">
+      Type derive
+    </Key>
+    <Key "blocked">
+      Type derive
+    </Key>
+    <Key "abnormal">
+      Type derive
+    </Key>
+    <Key "tnt_errors">
+      Type derive
+    </Key>
+    <Key "api_errors">
+      Type derive
+    </Key>
+    <Key "requests_lost">
+      Type derive
+    </Key>
+    <Key "time_detect">
+      Type derive
+    </Key>
+    <Key "time_tnt">
+      Type derive
+    </Key>
+  </URL>
+</Plugin>

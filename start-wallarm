@@ -1,0 +1,186 @@
+#!/bin/sh
+
+set -e
+
+psmgr=/tmp/nginx-buildpack-wait
+rm -f $psmgr
+mkfifo $psmgr
+
+. /app/wallarm/etc/env
+
+wait_for() {
+	while true; do nc -w0 $1 $2 && return; sleep 1; done
+}
+
+wait_for_tarantool() {
+	wait_for 127.0.0.1 3313
+}
+
+tarantool_job() {
+	(
+		TIMEOUT="$1 $2"; shift; shift
+		JOB_NAME=$1; shift
+
+		echo 'buildpack=wallarm at=wait-for-tarantool'
+
+		while true; do
+			echo "buildpack=wallarm at=${JOB_NAME}"
+			timeout -k ${TIMEOUT} \
+				${COMMON_DIR}/${JOB_NAME} \
+				-c ${WALLARM_NODECONFIG} || true
+			sleep 60
+		done
+
+		echo $JOB_NAME >$psmgr
+	) &
+}
+
+#Evaluate config to get $PORT
+mv ${NGINX_CONFIG} ${NGINX_CONFIG}.wallarm
+erb ${NGINX_CONFIG}.erb > ${NGINX_CONFIG}
+
+while getopts f name; do
+	case $name in
+		f)	FORCE=1
+			shift
+			;;
+	esac
+done
+
+#Initialize log directory.
+mkdir -p ${NGINX_LOGDIR}
+touch ${NGINX_ACCESSLOG} ${NGINX_ERRORLOG}
+echo 'buildpack=wallarm at=logs-initialized'
+
+#Start log redirection.
+(
+	#Redirect NGINX logs to stdout.
+	tail -qF -n 0 ${NGINX_LOGDIR}/*.log
+	echo 'logs' >$psmgr
+) &
+
+#Start App Server
+(
+	#Take the command passed to this bin and start it.
+	#E.g. bin/start-nginx bundle exec unicorn -c config/unicorn.rb
+        COMMAND=$@
+	echo "buildpack=wallarm at=start-app cmd=$COMMAND"
+	$COMMAND
+	echo 'app' >$psmgr
+) &
+
+echo 'buildpack=wallarm at=add-node'
+
+${ADDNODE_CMD} -b -u $WALLARM_USER -p $WALLARM_PASSWORD \
+	--ca-file ${COMMON_DIR}/ca.pem \
+	--no-sync \
+	-c ${WALLARM_NODECONFIG} \
+	-k ${WALLARM_LICENSEKEY}
+
+cat <<EOF >> ${WALLARM_NODECONFIG}
+syncnode:
+  triggers_dir: ${WALLARM_CONFDIR}/triggers.d
+  proton.db:
+    path: ${WALLARM_PROTONDB}
+    owner: $(whoami)
+    group: dyno
+  lom:
+    path: ${WALLARM_LOM}
+    owner: $(whoami)
+    group: dyno
+  selectors:
+    path: ${WALLARM_CONFDIR}/selectors
+    owner: $(whoami)
+    group: dyno
+proton:
+  key_file: ${WALLARM_LICENSEKEY}
+log:
+  location: STDOUT
+EOF
+
+echo 'buildpack=wallarm at=sync-node'
+
+${SYNCNODE_CMD} -c ${WALLARM_NODECONFIG}
+	
+#Start tarantool
+(
+	export SNAPSHOT_PERIOD=0
+	export LOGFILE=/dev/null
+	export WORKDIR=/tmp
+	export HOST=$TARANTOOL_HOST
+	export PORT=$TARANTOOL_PORT
+	export SLAB_ALLOC_ARENA=${WALLARM_TARANTOOL_MEMORY:-`/usr/bin/awk '/^MemTotal:/ { printf "%.1f", $2 / (2 * 1024 * 1024); }' < /proc/meminfo`}
+	echo 'buildpack=wallarm at=tarantool-start'
+	wallarm/bin/tarantool wallarm/share/wallarm-tarantool/init.lua
+	echo 'tarantool' >$psmgr
+) &
+
+if [ -z "$FORCE" ]
+then
+	FILE="/tmp/app-initialized"
+
+	#We block on app-initialized so that when NGINX binds to $PORT
+	#are app is ready for traffic.
+	while [ ! -f "$FILE" ]
+	do
+		echo 'buildpack=wallarm at=app-initialization'
+		sleep 1
+	done
+	echo 'buildpack=wallarm at=app-initialized'
+fi
+
+#Start NGINX
+#We expect nginx to run in foreground.
+#We also expect a socket to be at /tmp/nginx.socket.
+(
+	wait_for_tarantool
+
+	echo 'buildpack=wallarm at=nginx-start'
+
+	mkdir -p /tmp/nginx/wallarm
+	${NGINX_CMD} -p ${WALLARM_DIR} -c ${NGINX_CONFIG}
+	echo 'nginx' >$psmgr
+) &
+
+(
+	echo 'buildpack=wallarm at=wait-for-nginx-status'
+
+	wait_for 127.0.0.8 $PORT
+
+	echo 'buildpack=wallarm at=collectd-start'
+
+	erb ${COLLECTD_CONFIG}.erb > ${COLLECTD_CONFIG}
+	${COLLECTD_CMD} -f -C ${COLLECTD_CONFIG}
+
+	echo 'collectd' >$psmgr
+) &
+
+# start syncnode
+(
+	while true; do
+		sleep 900
+		echo 'buildpack=wallarm at=sync-node'
+		${SYNCNODE_CMD} -c ${WALLARM_NODECONFIG} -r 600 || true
+	done
+
+	echo 'sync-node' >$psmgr
+) &
+
+wait_for_tarantool
+tarantool_job 1m  1h  'sync-markers'
+tarantool_job 1m  3h  'export-attacks'
+tarantool_job 15s 11m 'export-counters' 
+tarantool_job 15s 11m 'export-clusterization-data'
+tarantool_job 15s 11m 'sync-brute-clusters'
+tarantool_job 1m  3h  'export-spots'
+tarantool_job 15s 6m  'brute-detect'
+
+#This read will block the process waiting on a msg to be put into the fifo.
+#If any of the processes defined above should exit,
+#a msg will be put into the fifo causing the read operation
+#to un-block. The process putting the msg into the fifo
+#will use it's process name as a msg so that we can print the offending
+#process to stdout.
+read exit_process <$psmgr
+echo "buildpack=wallarm at=exit process=$exit_process"
+exit 1

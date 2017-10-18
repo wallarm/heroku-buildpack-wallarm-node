@@ -1,0 +1,55 @@
+#!/bin/sh
+
+export LD_LIBRARY_PATH=/app/wallarm/lib:/app/wallarm/lib/python2.7/config-x86_64-linux-gnu
+export RUBYLIB=/app/wallarm/lib/ruby/vendor_ruby:/app/wallarm/lib/ruby/vendor_ruby/1.9.1:/app/wallarm/lib/ruby/vendor_ruby/2.3.0:/app/wallarm/lib/ruby/vendor_ruby/1.9.1/x86_64-linux
+export PYTHONPATH=/app/wallarm/lib/python2.7/dist-packages
+export LUA_CPATH="/app/wallarm/lib/tarantool/?.so"
+export LUA_PATH="/app/wallarm/share/tarantool/?.lua;/app/wallarm/share/tarantool/?/init.lua"
+
+export WALLARM_DIR=/app/wallarm
+
+export LOGDIR=${WALLARM_DIR}/logs
+export CONFDIR=${WALLARM_DIR}/etc
+export COMMON_DIR=${WALLARM_DIR}/share/wallarm-common
+export SBINDIR=${WALLARM_DIR}/sbin
+
+export ADDNODE_CMD=${COMMON_DIR}/addnode
+export SYNCNODE_CMD=${COMMON_DIR}/syncnode
+export EXPORTATTACKS_CMD=${COMMON_DIR}/export-attacks
+
+export WALLARM_CONFDIR=${CONFDIR}/wallarm
+export WALLARM_NODECONFIG=${WALLARM_CONFDIR}/node.yml
+export WALLARM_LICENSEKEY=${WALLARM_CONFDIR}/license.key
+export WALLARM_PROTONDB=${WALLARM_CONFDIR}/proton.db
+export WALLARM_LOM=${WALLARM_CONFDIR}/lom
+
+export NGINX_CMD=${SBINDIR}/nginx-wallarm
+export NGINX_LOGDIR=${LOGDIR}/nginx
+export NGINX_CONFDIR=${CONFDIR}/nginx-wallarm
+export NGINX_CONFIG=${NGINX_CONFDIR}/nginx.conf
+export NGINX_ACCESSLOG=${NGINX_LOGDIR}/access.log
+export NGINX_ERRORLOG=${NGINX_LOGDIR}/error.log
+
+export COLLECTD_CMD=${SBINDIR}/collectd
+export COLLECTD_CONFIG=${CONFDIR}/collectd/collectd.conf
+export COLLECTD_LIBDIR=${WALLARM_DIR}/lib/collectd
+export COLLECTD_PYTHONDIR=${COLLECTD_LIBDIR}/python
+export COLLECTD_TYPESDB=${WALLARM_DIR}/share/collectd/types.db
+
+export TARANTOOL_HOST=127.0.0.1
+export TARANTOOL_PORT=3313
+if [ "$PORT" = "$TARANTOOL_PORT" ]; then
+	export TARANTOOL_PORT=13313
+fi
+
+export WALLARM_BACKEND=${WALLARM_BACKEND:-unix:/tmp/nginx.socket}
+case $WALLARM_MODE in
+	off|monitoring|block)
+		;;
+	*)
+		if [ -n "$WALLARM_MODE" ]; then
+			echo "WARNING: unknown mode \"$WALLARM_MODE\"; assume monitoring"
+		fi
+		export WALLARM_MODE=monitoring
+		;;
+esac

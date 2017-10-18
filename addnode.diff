@@ -1,0 +1,24 @@
+diff --git a/bin/addnode b/bin/addnode
+index 9d6bf49..dd02251 100755
+--- a/bin/addnode
++++ b/bin/addnode
+@@ -143,8 +143,7 @@ def check_config
+     configfile.chmod( 0640)
+     configfile.chown( 0, user.gid) unless user.nil?
+   rescue => e
+-    puts "ERROR: can't set owner and/or permissions on `#{Conf.file}' (#{e.class}: #{e.message}).".red
+-    return false
++    puts "WARNING: can't set owner and/or permissions on `#{Conf.file}' (#{e.class}: #{e.message}).".yellow
+   end
+ 
+   true
+@@ -184,8 +183,7 @@ def check_license
+     licensefile.chmod( 0640)
+     licensefile.chown( 0, user.gid) unless user.nil?
+   rescue => e
+-    puts "ERROR: can't set owner and/or permissions on `#{Conf.key_file}' (#{e.class}: #{e.message}).".red
+-    return false
++    puts "WARNING: can't set owner and/or permissions on `#{Conf.key_file}' (#{e.class}: #{e.message}).".yellow
+   end
+ 
+   true
