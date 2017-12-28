@@ -7,7 +7,7 @@ libesmtp6_1.0.6-1ubuntu2_amd64.deb
 libhubbub_0.3.3+wallarm2-2_amd64.deb
 libmcrypt4_2.5.8-3.1ubuntu1_amd64.deb
 libparserutils_0.2.3-4_amd64.deb
-libproton26_2.6.3_amd64.deb
+libproton26_2.6.4_amd64.deb
 librrd4_1.4.7-2ubuntu5_amd64.deb
 libtws0_0.0.3_amd64.deb
 libunwind8_1.1-2.2ubuntu3_amd64.deb
@@ -28,7 +28,8 @@ ruby-highline_1.6.20-1_all.deb
 ruby-json_1.8.0-1build1_amd64.deb
 ruby-msgpack_0.6.2-2_amd64.deb
 ruby-murmurhash3_0.1.4-4_amd64.deb
-ruby-proton_2.6.3_amd64.deb
+ruby-parser-generator_0.2.0-1_all.deb
+ruby-proton_2.6.4_amd64.deb
 ruby-tarantool16_0.0.7-1_all.deb
 ruby-thread_0.1.4+20140502+7e91ca4-3_all.deb
 ruby-wallarm-api_2.6.0_all.deb
