@@ -43,7 +43,8 @@ ruby-thread_0.1.4+20140502+7e91ca4-3_all.deb
 ruby-unf-ext_0.0.7.2-1build2_amd64.deb
 ruby-unf_0.1.4-1_all.deb
 ruby-wallarm-api_2.8.5_all.deb
-tarantool_1.7.4.329.g2e4b6fd-1_amd64.deb
+tarantool-common_1.9.1.16.ge9bf00f-1_all.deb
+tarantool_1.9.1.16.ge9bf00f-1_amd64.deb
 wallarm-collectd-core_5.5.1-1build2+2_amd64.deb
 wallarm-collectd_5.5.1-1build2+2_amd64.deb
 wallarm-common_2.8.5_all.deb
@@ -51,4 +52,4 @@ wallarm-monitoring_2.8.5_all.deb
 wallarm-node-nginx_2.8.5_all.deb
 wallarm-node-tarantool_2.8.5_all.deb
 wallarm-node_2.8.5_all.deb
-wallarm-tarantool_1.10.6-1_amd64.deb
+wallarm-tarantool_1.10.7-1_amd64.deb
