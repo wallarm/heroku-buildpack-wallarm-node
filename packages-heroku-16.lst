@@ -6,7 +6,7 @@ libdetection1_1.0.0-2_amd64.deb
 libhubbub_0.3.3+wallarm2-2_amd64.deb
 liblmdb0_0.9.17-3_amd64.deb
 libparserutils_0.2.3-4_amd64.deb
-libproton28_2.8.4_amd64.deb
+libproton28_2.8.5_amd64.deb
 libpython2.7_2.7.12-1ubuntu0~16.04.3_amd64.deb
 librrd4_1.5.5-4_amd64.deb
 libtws0_0.0.4_amd64.deb
@@ -36,7 +36,7 @@ ruby-msgpack_0.6.2-1build4_amd64.deb
 ruby-murmurhash3_0.1.4-4_amd64.deb
 ruby-netrc_0.10.3-1_all.deb
 ruby-parser-generator_0.3.3-1_all.deb
-ruby-proton_2.8.4_amd64.deb
+ruby-proton_2.8.5_amd64.deb
 ruby-rest-client_1.8.0-2ubuntu1_all.deb
 ruby-tarantool16_0.0.7-1_all.deb
 ruby-thread_0.1.4+20140502+7e91ca4-3_all.deb
