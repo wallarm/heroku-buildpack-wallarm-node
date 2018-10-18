@@ -101,7 +101,7 @@ EOF
 echo 'buildpack=wallarm at=sync-node'
 
 ${SYNCNODE_CMD} -c ${WALLARM_NODECONFIG}
-	
+
 #Start tarantool
 (
 	export SNAPSHOT_PERIOD=0
@@ -169,7 +169,7 @@ fi
 wait_for_tarantool
 tarantool_job 1m  1h  'sync-markers'
 tarantool_job 1m  3h  'export-attacks'
-tarantool_job 15s 11m 'export-counters' 
+tarantool_job 15s 11m 'export-counters'
 tarantool_job 15s 11m 'export-clusterization-data'
 tarantool_job 15s 11m 'sync-brute-clusters'
 tarantool_job 1m  3h  'export-spots'

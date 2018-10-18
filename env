@@ -23,9 +23,9 @@ export WALLARM_LICENSEKEY=${WALLARM_CONFDIR}/license.key
 export WALLARM_PROTONDB=${WALLARM_CONFDIR}/proton.db
 export WALLARM_LOM=${WALLARM_CONFDIR}/lom
 
-export NGINX_CMD=${SBINDIR}/nginx-wallarm
+export NGINX_CMD=${SBINDIR}/nginx
 export NGINX_LOGDIR=${LOGDIR}/nginx
-export NGINX_CONFDIR=${CONFDIR}/nginx-wallarm
+export NGINX_CONFDIR=${CONFDIR}/nginx
 export NGINX_CONFIG=${NGINX_CONFDIR}/nginx.conf
 export NGINX_ACCESSLOG=${NGINX_LOGDIR}/access.log
 export NGINX_ERRORLOG=${NGINX_LOGDIR}/error.log

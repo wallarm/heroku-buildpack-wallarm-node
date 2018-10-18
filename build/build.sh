@@ -20,7 +20,7 @@ apt-key adv --keyserver keys.gnupg.net --recv-keys 72B865FD
 echo "deb http://repo.wallarm.com/ubuntu/wallarm-node $DIST/" >/etc/apt/sources.list.d/wallarm.list
 echo "deb http://repo.wallarm.com/ubuntu/wallarm-node-heroku $DIST/" >>/etc/apt/sources.list.d/wallarm.list
 apt-get -q update
-apt-get -q install -dy --force-yes --no-install-recommends wallarm-node nginx-wallarm-heroku
+apt-get -q install -dy --force-yes --no-install-recommends nginx wallarm-node nginx-module-wallarm
 rm -f /var/cache/apt/archives/binutils*.deb
 ls /var/cache/apt/archives/*.deb | xargs -L1 basename | sort > ${PKGLIST_NEW}
 if [ -f $PKGLIST ] && diff $PKGLIST $PKGLIST_NEW; then

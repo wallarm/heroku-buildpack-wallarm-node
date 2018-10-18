@@ -29,7 +29,7 @@ http {
 
 	upstream app_server {
 		server <%= ENV['WALLARM_BACKEND'] %> fail_timeout=0;
- 	}
+	}
 
 	wallarm_mode <%= ENV['WALLARM_MODE'] %>;
 	wallarm_key_path <%= ENV['WALLARM_LICENSEKEY'] %>;
