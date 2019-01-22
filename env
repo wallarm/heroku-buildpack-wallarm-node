@@ -53,3 +53,5 @@ case $WALLARM_MODE in
 		export WALLARM_MODE=monitoring
 		;;
 esac
+
+export WALLARM_API_HOST=${WALLARM_API_HOST:-api.wallarm.com}

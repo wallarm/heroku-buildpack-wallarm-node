@@ -51,6 +51,7 @@ You can use the following environment variables:
 `WALLARM_USER` - The user at my.wallarm.com that has rights to add new nodes.
 `WALLARM_PASSWORD` - The user password.
 `WALLARM_MODE` - The request handling mode: `off`, `monitoring` (default), `block`.
+`WALLARM_API_HOST` - Address of Wallarm API service ("api.wallarm.com" by default)
 `WALLARM_TARANTOOL_MEMORY` - The amount of memory in gigabytes allocated to postanalytics (0.5 of total memory by default).
 
 For example, to set your `WALLARM_MODE` to the blocking mode:

@@ -71,7 +71,7 @@ echo 'buildpack=wallarm at=logs-initialized'
 
 echo 'buildpack=wallarm at=add-node'
 
-${ADDNODE_CMD} -b -u $WALLARM_USER -p $WALLARM_PASSWORD \
+${ADDNODE_CMD} -b -H $WALLARM_API_HOST -u $WALLARM_USER -p $WALLARM_PASSWORD \
 	--ca-file ${COMMON_DIR}/ca.pem \
 	--no-sync \
 	-c ${WALLARM_NODECONFIG} \
