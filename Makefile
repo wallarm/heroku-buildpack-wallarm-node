@@ -8,4 +8,4 @@ heroku-16:
 	docker build -t wallarm/heroku:16 -f build/heroku-16.dockerfile .
 	docker run --rm --userns=host -v "`pwd`:/result" wallarm/heroku:16
 
-.PHONY: all cedar-14 heroky-16
+.PHONY: all cedar-14 heroku-16

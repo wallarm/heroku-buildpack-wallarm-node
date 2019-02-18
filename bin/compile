@@ -8,11 +8,11 @@ ENV_DIR=$3
 
 tar -xzC $BUILD_DIR -f wallarm-${STACK}.tgz
 PATCH=`pwd`/addnode.diff
-patch -d $BUILD_DIR/wallarm/share/wallarm-common -p2 < addnode.diff
+patch -d $BUILD_DIR/wallarm/share/wallarm-common < addnode.diff
 cp env $BUILD_DIR/wallarm/etc
 cp start-wallarm $BUILD_DIR/wallarm/bin
-if [ ! -f $BUILD_DIR/wallarm/etc/nginx-wallarm/nginx.conf.erb ]; then
-	cp nginx.conf.erb $BUILD_DIR/wallarm/etc/nginx-wallarm
+if [ ! -f $BUILD_DIR/wallarm/etc/nginx/nginx.conf.erb ]; then
+	cp nginx.conf.erb $BUILD_DIR/wallarm/etc/nginx
 fi
 cp collectd.conf.erb $BUILD_DIR/wallarm/etc/collectd
 cp nginx-wallarm.trigger $BUILD_DIR/wallarm/etc/wallarm/triggers.d/nginx-wallarm

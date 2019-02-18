@@ -80,6 +80,8 @@ ${ADDNODE_CMD} -b -H $WALLARM_API_HOST -u $WALLARM_USER -p $WALLARM_PASSWORD \
 cat <<EOF >> ${WALLARM_NODECONFIG}
 syncnode:
   triggers_dir: ${WALLARM_CONFDIR}/triggers.d
+  owner: $(whoami)
+  group: dyno
   proton.db:
     path: ${WALLARM_PROTONDB}
     owner: $(whoami)
@@ -111,7 +113,7 @@ ${SYNCNODE_CMD} -c ${WALLARM_NODECONFIG}
 	export PORT=$TARANTOOL_PORT
 	export SLAB_ALLOC_ARENA=${WALLARM_TARANTOOL_MEMORY:-`/usr/bin/awk '/^MemTotal:/ { printf "%.1f", $2 / (2 * 1024 * 1024); }' < /proc/meminfo`}
 	echo 'buildpack=wallarm at=tarantool-start'
-	wallarm/bin/tarantool wallarm/share/wallarm-tarantool/init.lua
+	${TARANTOOL_CMD} ${WALLARM_DIR}/share/wallarm-tarantool/init.lua
 	echo 'tarantool' >$psmgr
 ) &
 

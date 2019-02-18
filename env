@@ -11,7 +11,9 @@ export WALLARM_DIR=/app/wallarm
 export LOGDIR=${WALLARM_DIR}/logs
 export CONFDIR=${WALLARM_DIR}/etc
 export COMMON_DIR=${WALLARM_DIR}/share/wallarm-common
+export BINDIR=${WALLARM_DIR}/bin
 export SBINDIR=${WALLARM_DIR}/sbin
+export MODULES_DIR=${WALLARM_DIR}/lib/nginx/modules
 
 export ADDNODE_CMD=${COMMON_DIR}/addnode
 export SYNCNODE_CMD=${COMMON_DIR}/syncnode
@@ -23,9 +25,9 @@ export WALLARM_LICENSEKEY=${WALLARM_CONFDIR}/license.key
 export WALLARM_PROTONDB=${WALLARM_CONFDIR}/proton.db
 export WALLARM_LOM=${WALLARM_CONFDIR}/lom
 
-export NGINX_CMD=${SBINDIR}/nginx-wallarm
-export NGINX_LOGDIR=${LOGDIR}/nginx
-export NGINX_CONFDIR=${CONFDIR}/nginx-wallarm
+export NGINX_CMD=${SBINDIR}/nginx
+export NGINX_LOGDIR=${LOGDIR}
+export NGINX_CONFDIR=${CONFDIR}/nginx
 export NGINX_CONFIG=${NGINX_CONFDIR}/nginx.conf
 export NGINX_ACCESSLOG=${NGINX_LOGDIR}/access.log
 export NGINX_ERRORLOG=${NGINX_LOGDIR}/error.log
@@ -36,6 +38,7 @@ export COLLECTD_LIBDIR=${WALLARM_DIR}/lib/collectd
 export COLLECTD_PYTHONDIR=${COLLECTD_LIBDIR}/python
 export COLLECTD_TYPESDB=${WALLARM_DIR}/share/collectd/types.db
 
+export TARANTOOL_CMD=${BINDIR}/tarantool
 export TARANTOOL_HOST=127.0.0.1
 export TARANTOOL_PORT=3313
 if [ "$PORT" = "$TARANTOOL_PORT" ]; then
