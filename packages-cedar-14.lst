@@ -9,10 +9,6 @@ liblmdb0_0.9.18-5_amd64.deb
 libmcrypt4_2.5.8-3.1ubuntu1_amd64.deb
 libparserutils_0.2.3-5_amd64.deb
 libproton210_2.10.12_amd64.deb
-libpython2.7-dev_2.7.6-8ubuntu0.5_amd64.deb
-libpython2.7-minimal_2.7.6-8ubuntu0.5_amd64.deb
-libpython2.7-stdlib_2.7.6-8ubuntu0.5_amd64.deb
-libpython2.7_2.7.6-8ubuntu0.5_amd64.deb
 librrd4_1.4.7-2ubuntu5_amd64.deb
 libtws0_0.0.6_amd64.deb
 libunwind8_1.1-2.2ubuntu3_amd64.deb
@@ -30,9 +26,6 @@ python-nsca_1%3a1.6a+fbe7965-2_all.deb
 python-nscang_1.2-1_amd64.deb
 python-tarantool16_0.5.1-1_all.deb
 python-yaml_3.10-4ubuntu0.1_amd64.deb
-python2.7-dev_2.7.6-8ubuntu0.5_amd64.deb
-python2.7-minimal_2.7.6-8ubuntu0.5_amd64.deb
-python2.7_2.7.6-8ubuntu0.5_amd64.deb
 ruby-hashie_2.0.3-1_all.deb
 ruby-highline_1.6.20-1_all.deb
 ruby-json_1.8.0-1build1_amd64.deb
