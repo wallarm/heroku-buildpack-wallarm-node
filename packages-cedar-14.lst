@@ -8,7 +8,7 @@ libhubbub_0.3.3+wallarm3-1_amd64.deb
 liblmdb0_0.9.18-5_amd64.deb
 libmcrypt4_2.5.8-3.1ubuntu1_amd64.deb
 libparserutils_0.2.3-5_amd64.deb
-libproton212_2.12.4_amd64.deb
+libproton212_2.12.5_amd64.deb
 librrd4_1.4.7-2ubuntu5_amd64.deb
 libtws0_0.0.6_amd64.deb
 libunwind8_1.1-2.2ubuntu3_amd64.deb
@@ -33,7 +33,7 @@ ruby-mime-types_1.25-1_all.deb
 ruby-msgpack_0.6.2-2_amd64.deb
 ruby-murmurhash3_0.1.4-4_amd64.deb
 ruby-parser-generator_0.3.3-1_all.deb
-ruby-proton_2.12.4_amd64.deb
+ruby-proton_2.12.5_amd64.deb
 ruby-rest-client_1.6.7-4_all.deb
 ruby-tarantool16_0.0.7-1_all.deb
 ruby-thread_0.1.4+20140502+7e91ca4-3_all.deb
