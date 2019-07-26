@@ -3,7 +3,7 @@ libconfig9_1.5-0.2_amd64.deb
 libcpire_0.4.2-5_amd64.deb
 libdbi1_0.9.0-4_amd64.deb
 libdetection1_1.1.0-1_amd64.deb
-libhubbub_0.3.3+wallarm3-1_amd64.deb
+libhubbub_0.3.3+wallarm3-5_amd64.deb
 liblmdb0_0.9.17-3_amd64.deb
 libparserutils_0.2.3-9_amd64.deb
 libproton212_2.12.13_amd64.deb
@@ -11,7 +11,7 @@ librrd4_1.5.5-4_amd64.deb
 libtws0_0.0.6_amd64.deb
 libunwind8_1.1-4.1_amd64.deb
 libwacl_1.0.4_amd64.deb
-libwlog_1.1.1_amd64.deb
+libwlog_1.1.1-5_amd64.deb
 libwpire_0.0.5+git20180504-5_amd64.deb
 libwyajl2_2.0.4+w3-5_amd64.deb
 libyajl2_2.1.0-2_amd64.deb
