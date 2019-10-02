@@ -21,7 +21,7 @@ libwyajl2_2.0.4+w3-5_amd64.deb
 libyajl2_2.1.0-2_amd64.deb
 monitoring-plugins-common_2.1.2-2ubuntu2_amd64.deb
 nagios-plugins-common_2.1.2-2ubuntu2_all.deb
-nginx-module-wallarm-heroku_2.12.1-1+heroku2_amd64.deb
+nginx-module-wallarm-heroku_2.12.7-2+heroku1_amd64.deb
 python-mcrypt_1.1-6_amd64.deb
 python-msgpack_0.4.6-1build1_amd64.deb
 python-nsca_1%3a1.6a+fbe7965-6_all.deb
