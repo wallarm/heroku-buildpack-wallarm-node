@@ -18,7 +18,7 @@ libwpire_0.0.5+git20180504-5_amd64.deb
 libwyajl2_2.0.4+w3-5_amd64.deb
 libyajl2_2.0.4-4_amd64.deb
 nagios-plugins-common_1.5-3ubuntu1_amd64.deb
-nginx-module-wallarm-heroku_2.12.1-1+heroku2_amd64.deb
+nginx-module-wallarm-heroku_2.12.7-2+heroku1_amd64.deb
 python-crypto_2.6.1-4ubuntu0.3_amd64.deb
 python-mcrypt_1.1-6_amd64.deb
 python-msgpack_0.4.2-1~ubuntu14.04.1_amd64.deb
