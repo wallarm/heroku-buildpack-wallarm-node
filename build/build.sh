@@ -12,6 +12,9 @@ case $STACK in
         heroku-16)
 		DIST=xenial
 		;;
+        heroku-18)
+		DIST=bionic
+		;;
 	*)
 		echo "Unknown stack $STACK"
 		exit 1
@@ -25,7 +28,7 @@ echo "deb http://repo.wallarm.com/ubuntu/wallarm-node-heroku $DIST/" >>/etc/apt/
 echo "deb http://nginx.org/packages/ubuntu $DIST nginx" >>/etc/apt/sources.list.d/nginx.list
 apt-get -q update
 apt-get -q install -dy --force-yes --no-install-recommends wallarm-node libpython2.7 nginx-module-wallarm-heroku
-rm -f /var/cache/apt/archives/binutils*.deb
+rm -f /var/cache/apt/archives/binutils*.deb || true
 ls /var/cache/apt/archives/*.deb | xargs -L1 basename | sort > ${PKGLIST_NEW}
 if [ -f $PKGLIST ] && diff $PKGLIST $PKGLIST_NEW; then
 	rm -f $PKGLIST_NEW
