@@ -21,7 +21,13 @@ case $STACK in
 		;;
 esac
 
-apt-key adv --keyserver keys.gnupg.net --recv-keys 72B865FD
+for i in $(seq 1 10); do
+	if apt-key adv --keyserver keys.gnupg.net --recv-keys 72B865FD; then
+		break
+	else
+		sleep "$i"
+	fi
+done
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 echo "deb http://repo.wallarm.com/ubuntu/wallarm-node $DIST/" >/etc/apt/sources.list.d/wallarm.list
 echo "deb http://repo.wallarm.com/ubuntu/wallarm-node-heroku $DIST/" >>/etc/apt/sources.list.d/wallarm.list
