@@ -6,6 +6,17 @@ psmgr=/tmp/nginx-buildpack-wait
 rm -f $psmgr
 mkfifo $psmgr
 
+
+#Start App Server, shoud be before setting our environment variables
+(
+	#Take the command passed to this bin and start it.
+	#E.g. bin/start-nginx bundle exec unicorn -c config/unicorn.rb
+        COMMAND=$@
+	echo "buildpack=wallarm at=start-app cmd=$COMMAND"
+	$COMMAND
+	echo 'app' >$psmgr
+) &
+
 . /app/wallarm/etc/env
 
 wait_for() {
@@ -57,16 +68,6 @@ echo 'buildpack=wallarm at=logs-initialized'
 	#Redirect NGINX logs to stdout.
 	tail -qF -n 0 ${NGINX_LOGDIR}/*.log
 	echo 'logs' >$psmgr
-) &
-
-#Start App Server
-(
-	#Take the command passed to this bin and start it.
-	#E.g. bin/start-nginx bundle exec unicorn -c config/unicorn.rb
-        COMMAND=$@
-	echo "buildpack=wallarm at=start-app cmd=$COMMAND"
-	$COMMAND
-	echo 'app' >$psmgr
 ) &
 
 echo 'buildpack=wallarm at=add-node'
