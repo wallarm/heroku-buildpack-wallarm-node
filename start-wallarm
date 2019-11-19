@@ -2,10 +2,23 @@
 
 set -e
 
+
+if [ -z "$WALLARM_ENABLED" ]; then
+	export WALLARM_ENABLED=yes
+fi
+
+if [ "$WALLARM_ENABLED" != "yes"  \
+	-a "$WALLARM_ENABLED" != "Yes"  \
+	-a "$WALLARM_ENABLED" != "true" \
+	-a "$WALLARM_ENABLED" != "True" \
+]; then
+	echo "buildpack=wallarm Skipping wallarm start..."
+	exec $@
+fi
+
 psmgr=/tmp/nginx-buildpack-wait
 rm -f $psmgr
 mkfifo $psmgr
-
 
 #Start App Server, shoud be before setting our environment variables
 (
