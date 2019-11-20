@@ -29,11 +29,10 @@ This buildpack updates automatically and installs the latest stable version of W
 
 ## Quick start
 
-Here are 2 setup examples. One example is for a new app; another one is for an existing app. In both cases, we are
-using Ruby & Unicorn. Keep in mind that this buildpack is not Ruby specific.
+These are two setup examples. One example is for a new app; another one is for an existing application. In both cases, we are using Ruby & Unicorn. Note: this buildpack is not Ruby specific.
 
-* [Create new application](docs/new-ruby-app.md)
-* [Update existing unicorn application](docs/unicorn-ruby-app.md)
+* [Create a new application](docs/new-ruby-app.md)
+* [Update an existing unicorn application](docs/unicorn-ruby-app.md)
 
 
 ## Features
@@ -63,11 +62,11 @@ web: wallarm/bin/start-wallarm bundle exec unicorn -c config/unicorn.rb
 
 You can use the following environment variables:
 
-* `WALLARM_USER` - The user at my.wallarm.com that has rights to add new nodes.
-* `WALLARM_PASSWORD` - The user password.
-* `WALLARM_MODE` - The request handling mode: `off`, `monitoring` (default), `block`.
-* `WALLARM_API_HOST` - Address of Wallarm API service ("api.wallarm.com" by default)
-* `WALLARM_TARANTOOL_MEMORY` - The amount of memory in gigabytes allocated to postanalytics (0.5 of total memory by default).
+* `WALLARM_USER` - user at my.wallarm.com with permissions to add new nodes.
+* `WALLARM_PASSWORD` - user password.
+* `WALLARM_MODE` - WAF mode: `off`, `monitoring` (default; detect but not block), `block` (detect and block).
+* `WALLARM_API_HOST` - address of Wallarm API service ("api.wallarm.com" by default)
+* `WALLARM_TARANTOOL_MEMORY` - amount of memory (in GB) allocated to the postanalytics module (0.5 of total memory by default).
 * `WALLARM_ENABLED` - Disable all wallarm services if set and has value other then "yes" or "true".
 
 Example: set your `WALLARM_MODE` to the blocking mode:
@@ -76,7 +75,7 @@ Example: set your `WALLARM_MODE` to the blocking mode:
 $ heroku config:set WALLARM_MODE=block
 ```
 
-Example: disable all wallarm features in debug purposes:
+Example: disable all the Wallarm features for the debug purposes:
 
 ```bash
 $ heroku config:set WALLARM_ENABLED=no
