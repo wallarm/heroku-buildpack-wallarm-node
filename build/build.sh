@@ -26,8 +26,7 @@ for i in $(seq 1 10); do
 	fi
 done
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
-echo "deb http://repo.wallarm.com/ubuntu/wallarm-node $DIST/" >/etc/apt/sources.list.d/wallarm.list
-echo "deb http://repo.wallarm.com/ubuntu/wallarm-node-heroku $DIST/" >>/etc/apt/sources.list.d/wallarm.list
+echo "deb http://repo.wallarm.com/ubuntu/wallarm-node $DIST/2.14/" >/etc/apt/sources.list.d/wallarm.list
 echo "deb http://nginx.org/packages/ubuntu $DIST nginx" >>/etc/apt/sources.list.d/nginx.list
 apt-get -q update
 apt-get -q install -dy --force-yes --no-install-recommends wallarm-node libpython2.7 nginx-module-wallarm-heroku
