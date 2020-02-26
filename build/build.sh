@@ -6,9 +6,6 @@ PKGLIST_NEW=${PKGLIST}.new
 TMPDEST=/tmp/app
 
 case $STACK in
-	cedar-14)
-		DIST=trusty
-		;;
         heroku-16)
 		DIST=xenial
 		;;
