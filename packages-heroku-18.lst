@@ -9,10 +9,6 @@ libhubbub_0.3.3+wallarm3-6_amd64.deb
 liblmdb0_0.9.21-1ubuntu0.1_amd64.deb
 libparserutils_0.2.3-10_amd64.deb
 libproton214_2.14.3_amd64.deb
-libpython2.7-dev_2.7.17-1~18.04ubuntu1_amd64.deb
-libpython2.7-minimal_2.7.17-1~18.04ubuntu1_amd64.deb
-libpython2.7-stdlib_2.7.17-1~18.04ubuntu1_amd64.deb
-libpython2.7_2.7.17-1~18.04ubuntu1_amd64.deb
 librrd8_1.7.0-1build1_amd64.deb
 libtws0_0.0.8_amd64.deb
 libunwind8_1.2.1-8_amd64.deb
@@ -31,9 +27,6 @@ python-nsca_1%3a1.6a+fbe7965-8_all.deb
 python-nscang_1.2-4_amd64.deb
 python-tarantool16_0.6.6-2_all.deb
 python-yaml_3.12-1build2_amd64.deb
-python2.7-dev_2.7.17-1~18.04ubuntu1_amd64.deb
-python2.7-minimal_2.7.17-1~18.04ubuntu1_amd64.deb
-python2.7_2.7.17-1~18.04ubuntu1_amd64.deb
 ruby-deep-msgpack_1.1.0-7_amd64.deb
 ruby-domain-name_0.5.20160216-2_all.deb
 ruby-hashie_3.5.5-2_all.deb
