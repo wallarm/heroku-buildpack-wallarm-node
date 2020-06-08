@@ -2,9 +2,9 @@
 
 export LD_LIBRARY_PATH=/app/wallarm/lib:/app/wallarm/lib/python2.7/config-x86_64-linux-gnu
 export RUBYLIB=/app/wallarm/lib/ruby/vendor_ruby
-if [ `grep -q "VERSION_CODENAME=bionic" /etc/os-release` ]; then
+if grep -q "VERSION_CODENAME=bionic" /etc/os-release; then
 	export RUBYLIB=$RUBYLIB:/app/wallarm/lib/ruby/vendor_ruby/2.5.0:/app/wallarm/share/rubygems-integration/all/gems/mime-types-3.1/lib/
-elif [ `grep -q "VERSION_CODENAME=xenial" /etc/os-release` ]; then
+elif grep -q "VERSION_CODENAME=xenial" /etc/os-release; then
 	export RUBYLIB=$RUBYLIB:/app/wallarm/lib/ruby/vendor_ruby/2.3.0:
 fi
 
